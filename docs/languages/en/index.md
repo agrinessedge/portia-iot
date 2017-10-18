@@ -67,7 +67,7 @@ The Portia-IoT API documentation (v1)
       import json
 
       url = "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/dimension/1/last"
-      payload = {access_token: "F894wrfDf344D-Q44fwr"}
+      payload = {"access_token": "F894wrfDf344D-Q44fwr"}
 
       # POST with JSON 
       response = requests.post(data=json.dumps(payload))
@@ -103,7 +103,7 @@ The Portia-IoT API documentation (v1)
 
 ### Dimensions with time intervals
 
-* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/device/**\<device_hash\>**/port/**\<port\>**/sensor/**\<sensor\>**/dimension/**\<dimension\>**/from/**\<from_timestamp\>**/to/**\<to_timestamp\>**
+* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/device/**\<device_hash\>**/port/**\<port\>**/sensor/**\<sensor\>**/dimension/**\<dimension\>**
 
 * **Method:** `POST`
 
@@ -112,11 +112,11 @@ The Portia-IoT API documentation (v1)
   * `port=[integer]`
   * `sensor=[integer]`
   * `dimension=[integer]`
-  * `from_timestamp=[unsigned long]`
-  * `to_timestamp=[unsigned long]`
 
 * **Required POST Params:**
   * `access_token=[string]`
+  * `from_timestamp=[unsigned long]`
+  * `to_timestamp=[unsigned long]`
 
 * **Success Response:**
 
@@ -139,12 +139,16 @@ The Portia-IoT API documentation (v1)
   * **Javascript:**
     ```javascript
       // Access token to be sent for authentication
-      let payload = {access_token: "F894wrfDf344D-Q44fwr"};
+      let payload = {
+        access_token: "F894wrfDf344D-Q44fwr",
+        from_timestamp: 1508330521,
+        to_timestamp: 1508330591
+      };
 
       // Ajax post request
       $.ajax({
 
-        url: "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/dimension/1/from/1508330521/to/1508330591",
+        url: "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/dimension/1",
         type: "POST",
         data: payload,
         dataType: "json",
@@ -166,8 +170,12 @@ The Portia-IoT API documentation (v1)
       # Library for JSON interaction
       import json
 
-      url = "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/dimension/1/from/1508330521/to/1508330591"
-      payload = {access_token: "F894wrfDf344D-Q44fwr"}
+      url = "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/dimension/1"
+      payload = {
+        "access_token": "F894wrfDf344D-Q44fwr",
+        "from_timestamp": 1508330521,
+        "to_timestamp": 1508330591
+      };
 
       # POST with JSON 
       response = requests.post(data=json.dumps(payload))
