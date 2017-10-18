@@ -203,7 +203,7 @@ The Portia-IoT API documentation (v1)
 
 ### Get devices
 
-* **URL:**  `http://io.portia.supe.solutions/api/v1/devices/all`
+* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/devices/all
 
 * **Method:** `POST`
 
