@@ -1,18 +1,20 @@
 ## Portia API 
 
-This project contains details about the [Portia-IoT Project](https://portia.supe.solutions). 
-The interface documentation itself and the implementation examples aim at allowing you to get up and running with our REST API. 
+This repository contains details about the [Portia-IoT Project](https://portia.supe.solutions). 
+The documentation itself and the implementation examples aim at allowing you to get up and running with our REST API. 
+Further details regarding *Portia Package* can be found in our [wiki](http://wiki.supe.solutions)
 
 ### Documentation
 
-The documentation of the REST interface is described in 
+The documentation of the REST interface is available in: 
 
-* [English](https://github.com/supesolutions/portia-iot/blob/master/docs/languages/en/index.md) [last update: oct/17]
+* [English](https://github.com/supesolutions/portia-iot/blob/master/docs/languages/en/index.md) 
 
-* Portuguese (pt-br) // To Do
+* Portuguese[pt-br] // To Do
 
 ### Examples
 
+You may also find useful to see some examples of how to consume the API using multiple languages:
 
 * [JavaScript](https://github.com/supesolutions/portia-iot/blob/master/examples/JavaScript.ipynb)
 
