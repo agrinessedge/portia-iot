@@ -5,18 +5,20 @@ The Portia-IoT API documentation (v1)
 
 ### Last dimension
 
-* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/device/**\<device_hash\>**/port/**\<port\>**/sensor/**\<sensor\>**/dimension/**\<dimension\>**/last
+* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/device/**\<device_hash\>**/port/**\<port\>**/sensor/**\<sensor\>**/last?limit=\<limit\>
 
-* **Method:** `POST`
+* **Method:** `GET`
 
 * **Required URL Params:**
   * `device_hash=[string]`
   * `port=[integer]`
   * `sensor=[integer]`
-  * `dimension=[integer]`
 
-* **Required POST Params:**
-  * `access_token=[string]`
+* **Required GET Params:**
+  * `limit=[integer]` [Optional, default = 1]
+
+* **Required HEADER Params:**
+  * `access_token=[string]` ['Authorization': Bearer \<access_token\>]
 
 * **Success Response:**
 
@@ -26,11 +28,11 @@ The Portia-IoT API documentation (v1)
 
 * **Error Response:**
 
-  * **Code:** `403 Forbidden`
+  * **Code:** `401 Unauthorized`
 
     * **Troubleshooting:** `Error on token authentication`
 
-  * **Code:** `404 Not Found`
+  * **Code:** `400 Bad Request`
 
     * **Troubleshooting:** `Error on request params`
 
@@ -39,16 +41,19 @@ The Portia-IoT API documentation (v1)
   * **Javascript:**
     ```javascript
       // Access token to be sent for authentication
-      let payload = {access_token: "F894wrfDf344D-Q44fwr"};
+      let accessToken = "F894wrfDf344D-Q44fwr";
 
       // Ajax post request
       $.ajax({
 
-        url: "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/dimension/1/last",
-        type: "POST",
-        data: payload,
+        url: "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/last",
+        type: "GET",
         dataType: "json",
         
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
+        },
+
         success: function(response) {
           console.log(response);
         }
@@ -56,28 +61,26 @@ The Portia-IoT API documentation (v1)
       });
     ```
 
-    * **Return:** `[{"server_timestamp":1508271656566,"package_local_timestamp":1508271655,"package_type_code":1,"package_username":"agrosensor","package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":2,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":23.2,"dimension_value_string":null,"dimension_unity_code":1,"dimension_thing_code":1,"dimension_thing_local_id":-1}]`
+    * **Return:** `[{"server_timestamp":1508434103038,"package_local_timestamp":1508434101,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1}]`
 
   * **Python:**
     ```python
       # Library for HTTP requests
       import requests
 
-      # Library for JSON interaction
-      import json
-
-      url = "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/dimension/1/last"
-      payload = {"access_token": "F894wrfDf344D-Q44fwr"}
+      # Sets URL
+      url = "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/last"
+      accessToken = "F894wrfDf344D-Q44fwr"
 
       # POST with JSON 
-      response = requests.post(data=json.dumps(payload))
+      response = requests.get(url, headers={"Authorization", "Bearer " + accessToken})
 
       # Response
       response.text
     ```
 
-    * **Return:** `[{"server_timestamp":1508271656566,"package_local_timestamp":1508271655,"package_type_code":1,"package_username":"agrosensor","package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":2,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":23.2,"dimension_value_string":null,"dimension_unity_code":1,"dimension_thing_code":1,"dimension_thing_local_id":-1}]`
-
+    * **Return:** `[{"server_timestamp":1508434103038,"package_local_timestamp":1508434101,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1}]`
+<!--
   * **Java:**
     ```java
       StringBuilder result = new StringBuilder();
@@ -100,23 +103,25 @@ The Portia-IoT API documentation (v1)
     ```
 
     * **Return:** `[{"server_timestamp":1508271656566,"package_local_timestamp":1508271655,"package_type_code":1,"package_username":"agrosensor","package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":2,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":23.2,"dimension_value_string":null,"dimension_unity_code":1,"dimension_thing_code":1,"dimension_thing_local_id":-1}]`
+-->
 
 ### Dimensions with time intervals
 
-* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/device/**\<device_hash\>**/port/**\<port\>**/sensor/**\<sensor\>**/dimension/**\<dimension\>**
+* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/device/**\<device_hash\>**/port/**\<port\>**/sensor/**\<sensor\>**
 
-* **Method:** `POST`
+* **Method:** `GET`
 
 * **Required URL Params:**
   * `device_hash=[string]`
   * `port=[integer]`
   * `sensor=[integer]`
-  * `dimension=[integer]`
 
-* **Required POST Params:**
-  * `access_token=[string]`
+* **Required GET Params:**
   * `from_timestamp=[unsigned long]`
-  * `to_timestamp=[unsigned long]`
+  * `to_timestamp=[unsigned long]` [Both optional, default = 24 hours]
+
+* **Required HEADER Params:**
+  * `access_token=[string]` ['Authorization': Bearer \<access_token\>]
 
 * **Success Response:**
 
@@ -126,11 +131,11 @@ The Portia-IoT API documentation (v1)
 
 * **Error Response:**
 
-  * **Code:** `403 Forbidden`
+  * **Code:** `401 Unauthorized`
 
     * **Troubleshooting:** `Error on token authentication`
 
-  * **Code:** `404 Not Found`
+  * **Code:** `400 Bad Request`
 
     * **Troubleshooting:** `Error on request params`
 
@@ -139,20 +144,26 @@ The Portia-IoT API documentation (v1)
   * **Javascript:**
     ```javascript
       // Access token to be sent for authentication
-      let payload = {
-        access_token: "F894wrfDf344D-Q44fwr",
-        from_timestamp: 1508330521,
-        to_timestamp: 1508330591
-      };
+      let accessToken = "F894wrfDf344D-Q44fwr";
+
+      // Setting the intervals for the last hour
+      let toTimestamp = Date.now();
+      let fromTimestamp = toTimestamp - hour;
+
+      // Sets URL
+      let url = "http://io.portia.supe.solutions/api/v1/device/Bk4TsimTbj8vt3hww/port/1/sensor/1?from_timestamp=" + fromTimestamp + "&?to_timestamp=" + toTimestamp;
 
       // Ajax post request
       $.ajax({
 
-        url: "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/dimension/1",
-        type: "POST",
-        data: payload,
+        url: url,
+        type: "GET",
         dataType: "json",
         
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
+        },
+
         success: function(response) {
           console.log(response);
         }
@@ -160,32 +171,30 @@ The Portia-IoT API documentation (v1)
       });
     ```
 
-    * **Return:** `[{"server_timestamp":1508271656566,"package_local_timestamp":1508271655,"package_type_code":1,"package_username":"agrosensor","package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":2,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":23.2,"dimension_value_string":null,"dimension_unity_code":1,"dimension_thing_code":1,"dimension_thing_local_id":-1}, {"server_timestamp":1508271656566,"package_local_timestamp":1508271655,"package_type_code":1,"package_username":"agrosensor","package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":2,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":23.2,"dimension_value_string":null,"dimension_unity_code":1,"dimension_thing_code":1,"dimension_thing_local_id":-1}]`
+    * **Return:** `[{"server_timestamp":1508434283522,"package_local_timestamp":1508434282000,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1},{"server_timestamp":1508434223402,"package_local_timestamp":1508434222000,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1},{"server_timestamp":1508434163294,"package_local_timestamp":1508434162000,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1},{"server_timestamp":1508434103038,"package_local_timestamp":1508434101000,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1},{"server_timestamp":1508434042957,"package_local_timestamp":1508434041000,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1}]`
 
   * **Python:**
     ```python
       # Library for HTTP requests
       import requests
 
-      # Library for JSON interaction
-      import json
+      # Setting the intervals for the last hour
+      toTimestamp = 1508330591;
+      fromTimestamp = 1508330591;
 
-      url = "http://io.portia.supe.solutions/api/v1/device/Bk4TFr2simTbj8vt3hww/port/1/sensor/1/dimension/1"
-      payload = {
-        "access_token": "F894wrfDf344D-Q44fwr",
-        "from_timestamp": 1508330521,
-        "to_timestamp": 1508330591
-      };
+      # Sets URL
+      url = "http://io.portia.supe.solutions/api/v1/device/Bk4TsimTbj8vt3hww/port/1/sensor/1?from_timestamp=" + fromTimestamp + "&?to_timestamp=" + toTimestamp;
+      accessToken = "F894wrfDf344D-Q44fwr"
 
       # POST with JSON 
-      response = requests.post(data=json.dumps(payload))
+      response = requests.get(url, headers={"Authorization", "Bearer " + accessToken})
 
       # Response
       response.text
     ```
 
-    * **Return:** `[{"server_timestamp":1508271656566,"package_local_timestamp":1508271655,"package_type_code":1,"package_username":"agrosensor","package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":2,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":23.2,"dimension_value_string":null,"dimension_unity_code":1,"dimension_thing_code":1,"dimension_thing_local_id":-1}, {"server_timestamp":1508271656566,"package_local_timestamp":1508271655,"package_type_code":1,"package_username":"agrosensor","package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":2,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":23.2,"dimension_value_string":null,"dimension_unity_code":1,"dimension_thing_code":1,"dimension_thing_local_id":-1}]`
-
+    * **Return:** `[{"server_timestamp":1508434283522,"package_local_timestamp":1508434282000,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1},{"server_timestamp":1508434223402,"package_local_timestamp":1508434222000,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1}]`
+<!--
   * **Java:**
     ```java
       StringBuilder result = new StringBuilder();
@@ -208,15 +217,16 @@ The Portia-IoT API documentation (v1)
     ```
 
     * **Return:** `[{"server_timestamp":1508271656566,"package_local_timestamp":1508271655,"package_type_code":1,"package_username":"agrosensor","package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":2,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":23.2,"dimension_value_string":null,"dimension_unity_code":1,"dimension_thing_code":1,"dimension_thing_local_id":-1}, {"server_timestamp":1508271656566,"package_local_timestamp":1508271655,"package_type_code":1,"package_username":"agrosensor","package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":2,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":23.2,"dimension_value_string":null,"dimension_unity_code":1,"dimension_thing_code":1,"dimension_thing_local_id":-1}]`
+-->
 
 ### Get devices
 
 * **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/devices/all
 
-* **Method:** `POST`
+* **Method:** `GET`
 
-* **Required POST Params:**
-  * `access_token=[string]`
+* **Required HEADER Params:**
+  * `access_token=[string]` ['Authorization': Bearer \<access_token\>]
 
 * **Success Response:**
 
@@ -226,7 +236,7 @@ The Portia-IoT API documentation (v1)
 
 * **Error Response:**
 
-  * **Code:** `403 Forbidden`
+  * **Code:** `401 Unauthorized`
 
     * **Troubleshooting:** `Error on token authentication`
 
@@ -235,16 +245,19 @@ The Portia-IoT API documentation (v1)
   * **Javascript:**
     ```javascript
       // Access token to be sent for authentication
-      let payload = {access_token: "F894wrfDf344D-Q44fwr"};
+      let accessToken = "F894wrfDf344D-Q44fwr";
 
       // Ajax post request
       $.ajax({
 
         url: "http://io.portia.supe.solutions/api/v1/devices/all",
-        type: "POST",
-        data: payload,
+        type: "GET",
         dataType: "json",
         
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
+        },
+
         success: function(response) {
           console.log(response);
         }
@@ -258,20 +271,18 @@ The Portia-IoT API documentation (v1)
       # Library for HTTP requests
       import requests
 
-      # Library for JSON interaction
-      import json
-
+      # Sets URL
       url = "http://io.portia.supe.solutions/api/v1/devices/all"
-      payload = {access_token: "F894wrfDf344D-Q44fwr"}
+      accessToken = "F894wrfDf344D-Q44fwr"
 
       # POST with JSON 
-      response = requests.post(data=json.dumps(payload))
+      response = requests.get(url, headers={"Authorization", "Bearer " + accessToken})
 
       # Response
       response.text
     ```
     * **Return:** `["WR3432-24D22waew4", "R3wrwq32-24FwaeR4", "d3wrwq32r24Fwa566", "4333Arwq3wfw24Fwa"]`
-
+<!--
   * **Java:**
     ```java
       StringBuilder result = new StringBuilder();
@@ -293,7 +304,7 @@ The Portia-IoT API documentation (v1)
       return result.toString();
     ```
     * **Return:** `["WR3432-24D22waew4", "R3wrwq32-24FwaeR4", "d3wrwq32r24Fwa566", "4333Arwq3wfw24Fwa"]`
-
+-->
 <!-- ### List users devices/paths
 
 * **URL:**  `http://io.portia.supe.solutions/api/v1/user/<username>/devices`
