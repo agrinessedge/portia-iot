@@ -5,7 +5,7 @@ The Portia-IoT API documentation (v1)
 
 ### Last dimension
 
-* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/device/**\<device_hash\>**/port/**\<port\>**/sensor/**\<sensor\>**/last?limit=\<limit\>
+* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/device/**\<device_hash\>**/port/**\<port\>**/sensor/**\<sensor\>**/last?limit=**\<limit\>**
 
 * **Method:** `GET`
 
@@ -107,7 +107,7 @@ The Portia-IoT API documentation (v1)
 
 ### Dimensions with time intervals
 
-* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/device/**\<device_hash\>**/port/**\<port\>**/sensor/**\<sensor\>**
+* **URL:** ht&#8203;tp://io.portia.supe.solutions/api/v1/device/**\<device_hash\>**/port/**\<port\>**/sensor/**\<sensor\>**?from_timestamp=**\<from_timestamp\>**&?to_timestamp=**\<to_timestamp\>**
 
 * **Method:** `GET`
 
