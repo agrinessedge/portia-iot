@@ -35,7 +35,7 @@ The Portia-IoT API documentation (v1)
   * **Code:** `400 Bad Request`
 
     * **Troubleshooting:** `Error on request params`
-
+<!--
 * **Sample Call:**
 
   * **Javascript:**
@@ -80,7 +80,7 @@ The Portia-IoT API documentation (v1)
     ```
 
     * **Return:** `[{"server_timestamp":1508434103038,"package_local_timestamp":1508434101,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1}]`
-<!--
+
   * **Java:**
     ```java
       StringBuilder result = new StringBuilder();
@@ -138,7 +138,7 @@ The Portia-IoT API documentation (v1)
   * **Code:** `400 Bad Request`
 
     * **Troubleshooting:** `Error on request params`
-
+<!--
 * **Sample Call:**
 
   * **Javascript:**
@@ -194,7 +194,7 @@ The Portia-IoT API documentation (v1)
     ```
 
     * **Return:** `[{"server_timestamp":1508434283522,"package_local_timestamp":1508434282000,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1},{"server_timestamp":1508434223402,"package_local_timestamp":1508434222000,"package_device_hash":"Bk4TsimTbj8vt3hww","dimension_port_id":1,"dimension_sensor_id":1,"dimension_code":1,"dimension_value":24.7,"dimension_unity_code":1,"dimension_thing_code":1}]`
-<!--
+
   * **Java:**
     ```java
       StringBuilder result = new StringBuilder();
@@ -239,7 +239,7 @@ The Portia-IoT API documentation (v1)
   * **Code:** `401 Unauthorized`
 
     * **Troubleshooting:** `Error on token authentication`
-
+<!--
 * **Sample Call:**
 
   * **Javascript:**
@@ -282,7 +282,7 @@ The Portia-IoT API documentation (v1)
       response.text
     ```
     * **Return:** `["WR3432-24D22waew4", "R3wrwq32-24FwaeR4", "d3wrwq32r24Fwa566", "4333Arwq3wfw24Fwa"]`
-<!--
+
   * **Java:**
     ```java
       StringBuilder result = new StringBuilder();
