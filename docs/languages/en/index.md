@@ -14,10 +14,10 @@ The Portia-IoT API documentation (v1)
   * `port=[integer]`
   * `sensor=[integer]`
 
-* **Required GET Params:**
+* **GET Params:**
   * `limit=[integer]` [Optional, default = 1]
 
-* **Required HEADER Params:**
+* **Required HEADER Param:**
   * `access_token=[string]` ['Authorization': Bearer \<access_token\>]
 
 * **Success Response:**
