@@ -1,4 +1,4 @@
-## Portia API 
+## Portia API (discontinued)
 
 This repository contains details about the [Portia-IoT Project](https://portia.supe.solutions). 
 The documentation itself and the implementation examples aim at allowing you to get up and running with our REST API. 
@@ -10,8 +10,6 @@ The documentation of the REST interface is available [here](https://github.com/s
 
 
 ### Examples
-
-You may also find useful to see some examples of how to consume the API using multiple languages:
 
 * [JavaScript](https://github.com/supesolutions/portia-iot/blob/master/examples/JavaScript.ipynb)
 * [PHP](https://github.com/supesolutions/portia-iot/blob/master/examples/PHP.ipynb)
