@@ -1,4 +1,6 @@
-## Portia API (discontinued)
+## Portia API (discontinued) 
+
+**Please refer to https://github.com/agrinessedgeiot  **
 
 This repository contains details about the [Portia-IoT Project](https://portia.supe.solutions). 
 The documentation itself and the implementation examples aim at allowing you to get up and running with our REST API. 
